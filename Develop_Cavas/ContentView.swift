@@ -11,32 +11,47 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
-
+    
+    @State var blocks: [BlockModel] = [
+        BlockModel(position: CGPoint(x: 50, y: 100), type: .start, color: .green),
+        BlockModel(position: CGPoint(x: 50, y: 50), type: .end, color: .blue),
+    ]
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
-        }
+//        NavigationSplitView {
+//            List {
+//                ForEach(items) { item in
+//                    NavigationLink {
+//                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+//                    } label: {
+//                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+//                    }
+//                }
+//                .onDelete(perform: deleteItems)
+//            }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    EditButton()
+//                }
+//                ToolbarItem {
+//                    Button(action: addItem) {
+//                        Label("Add Item", systemImage: "plus")
+//                    }
+//                }
+//            }
+//        } detail: {
+//            ZStack {
+//                GridHintView()
+//                BlockView(block: $blocks[0])
+//                BlockView(block: $blocks[1])
+//            }
+//        }
+        
+//        testV()
+        
+        
+        VStack {
+            Node()
+        }.statusBarHidden(true)
     }
 
     private func addItem() {
